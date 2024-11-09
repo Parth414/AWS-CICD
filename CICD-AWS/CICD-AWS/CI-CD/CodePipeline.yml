@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+    commands:
+      - echo Installing dependencies...
+      - pip install -r lambda_functions/resize_lambda/requirements.txt
+      - pip install -r lambda_functions/metadata_lambda/requirements.txt
+
+  build:
+    commands:
+      - echo Packaging Lambda functions...
+      - zip -r resize_lambda.zip lambda_functions/resize_lambda/
+      - zip -r metadata_lambda.zip lambda_functions/metadata_lambda/
+
+  post_build:
+    commands:
+      - echo Deploying Lambda functions...
+      - aws lambda update-function-code --function-name resize_lambda --zip-file fileb://resize_lambda.zip
+      - aws lambda update-function-code --function-name metadata_lambda --zip-file fileb://metadata_lambda.zip
+
+artifacts:
+  files:
+    - resize_lambda.zip
+    - metadata_lambda.zip
