@@ -39,34 +39,35 @@ dynamodb_setup.py: A Python script to automate the creation of the DynamoDB tabl
 api_gateway_setup.py: A Python script to configure the API Gateway, if you plan to invoke the Lambda functions via HTTP endpoints.
 
 ## Detailed Explanation of Files
-### 1. lambda_functions/resize_lambda/resize_lambda.py
+### 1. Lambda Functions/Resize Lambda/ResizeLambda.py
 This Lambda function resizes an uploaded image. It listens for S3 events and resizes the image, saving it to another bucket.
 
-resize_lambda.py: Main logic for image resizing.
-requirements.txt: Lists the Python dependencies for this Lambda (e.g., Pillow for image processing).
-test_resize_lambda.py: Unit tests for the resizing functionality.
-### 2. lambda_functions/metadata_lambda/metadata_lambda.py
+ResizeLambda.py: Main logic for image resizing.
+TestResizeLambda.py: Unit tests for the resizing functionality.
+
+### 2. Lambda Functions/Metadata Lambda/MetadataLambda.py
 This Lambda function extracts metadata from an uploaded image (like width, height, and file type) and stores it in DynamoDB.
 
-metadata_lambda.py: Main logic for image metadata extraction.
-requirements.txt: Lists the Python dependencies for this Lambda.
-test_metadata_lambda.py: Unit tests for the metadata extraction functionality.
-### 3. cloudformation.yaml
+MetadataLambda.py: Main logic for image metadata extraction.
+TestMetadataLambda.py: Unit tests for the metadata extraction functionality.
+
+### 3. CloudFormation.yaml
 Defines the AWS infrastructure, including S3 buckets, Lambda functions, DynamoDB table, and API Gateway (if used).
 
-### 4. codepipeline.yml
+### 4. CodePipeline.yml
 Defines the stages of the CI/CD pipeline:
 
 Install: Install dependencies for the Lambda functions.
 Build: Package the Lambda functions into .zip files.
 Post-Build: Deploy the packaged Lambda functions to AWS.
-### 5. s3_setup.py
+
+### 5. S3Setup.py
 Sets up S3 buckets using Boto3. This is necessary for storing the images that trigger the Lambda functions.
 
-### 6. dynamodb_setup.py
+### 6. DynamoDBSetup.py
 Sets up the DynamoDB table using Boto3. This table stores the metadata of images processed by the Lambda functions.
 
-### 7. api_gateway_setup.py
+### 7. APIGatewaySetup.py
 (Optional) This script sets up API Gateway if you wish to expose your Lambda functions as HTTP endpoints.
 
 ## Getting Started
@@ -85,20 +86,20 @@ cd AWS-CICD
 
 #### 2. Set Up AWS Resources
 
-Use the cloudformation.yaml file to provision the necessary AWS resources. You can either use the AWS Management Console or deploy using the AWS CLI:
+Use the CloudFormation.yaml file to provision the necessary AWS resources. You can either use the AWS Management Console or deploy using the AWS CLI:
 
-aws cloudformation create-stack --stack-name aws-cicd-stack --template-body file://cloudformation.yaml
+aws cloudformation create-stack --stack-name aws-cicd-stack --template-body file://CloudFormation.yaml
 
 #### 3. Set Up S3 Buckets and DynamoDB Table
 
-Run the s3_setup.py and dynamodb_setup.py scripts to create the S3 buckets and DynamoDB table:
+Run the S3Setup.py and DynamoDBSetup.py scripts to create the S3 buckets and DynamoDB table:
 
-python s3_setup.py
-python dynamodb_setup.py
+python S3Setup.py
+python DynamoDBSetup.py
 
 #### 4. Configure API Gateway (Optional)
 
-If you're using API Gateway to invoke the Lambda functions, run the api_gateway_setup.py script.
+If you're using API Gateway to invoke the Lambda functions, run the APIGatewaySetup.py script.
 
 #### 5. Deploy with CodePipeline
 
