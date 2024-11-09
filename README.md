@@ -4,19 +4,19 @@
 This project demonstrates the implementation of a fully automated CI/CD pipeline using AWS Lambda functions, AWS CodePipeline, and AWS SDK for Python (Boto3). The solution is designed to showcase how to build, test, deploy, and update AWS Lambda functions using a CI/CD pipeline, making use of AWS services like Lambda, S3, DynamoDB, and API Gateway.
 
 ## Key Features
-Lambda Functions: Two AWS Lambda functions are implemented — one for image metadata extraction (metadata_lambda.py) and another for resizing images (resize_lambda.py).
+Lambda Functions: Two AWS Lambda functions are implemented — one for image metadata extraction (MetadataLambda.py) and another for resizing images (ResizeLambda.py).
 CI/CD Pipeline: The project includes an automated CI/CD pipeline using AWS CodePipeline, which builds, tests, and deploys Lambda functions whenever changes are made to the repository.
 Automated Testing: The Lambda functions include unit tests written in Python using the pytest framework, ensuring the functions are correctly processing data before deployment.
 
 ## How the CI/CD Pipeline Works
 ### 1. Lambda Functions
-resize_lambda.py: This function resizes an image uploaded to an S3 bucket. The image’s new size is logged, and the resized image is saved to another S3 bucket.
-metadata_lambda.py: This function extracts metadata (such as dimensions and file type) from an image uploaded to an S3 bucket and stores this information in a DynamoDB table.
+ResizeLambda.py: This function resizes an image uploaded to an S3 bucket. The image’s new size is logged, and the resized image is saved to another S3 bucket.
+MetadataLambda.py: This function extracts metadata (such as dimensions and file type) from an image uploaded to an S3 bucket and stores this information in a DynamoDB table.
 ### 2. Automated Testing
 Both Lambda functions have corresponding test files:
 
-test_resize_lambda.py: This file contains unit tests for the resize_lambda.py function using the pytest framework and mocks AWS services like S3.
-test_metadata_lambda.py: This file contains unit tests for the metadata_lambda.py function, also using pytest and mocking S3 and DynamoDB services.
+TestResizeLambda.py: This file contains unit tests for the ResizeLambda.py function using the pytest framework and mocks AWS services like S3.
+TestMetadataLambda.py: This file contains unit tests for the MetadataLambda.py function, also using pytest and mocking S3 and DynamoDB services.
 
 ### 3. CI/CD Pipeline with AWS CodePipeline
 The CI/CD pipeline is defined using a YAML file (codepipeline.yml). This pipeline automates the following tasks:
@@ -34,9 +34,9 @@ Lambda Functions: For image resizing and metadata extraction.
 API Gateway: (Optional, if implementing an API).
 
 ### 5. Supporting Scripts
-s3_setup.py: A Python script to automate the creation of the necessary S3 buckets for storing images.
-dynamodb_setup.py: A Python script to automate the creation of the DynamoDB table where image metadata will be stored.
-api_gateway_setup.py: A Python script to configure the API Gateway, if you plan to invoke the Lambda functions via HTTP endpoints.
+S3Setup.py: A Python script to automate the creation of the necessary S3 buckets for storing images.
+DynamoDBSetup.py: A Python script to automate the creation of the DynamoDB table where image metadata will be stored.
+APIGatewaySetup.py: A Python script to configure the API Gateway, if you plan to invoke the Lambda functions via HTTP endpoints.
 
 ## Detailed Explanation of Files
 ### 1. Lambda Functions/Resize Lambda/ResizeLambda.py
