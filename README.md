@@ -1,4 +1,4 @@
-#AWS Lambda CI/CD Project
+# #AWS Lambda CI/CD Project
 Overview
 This project demonstrates the implementation of a fully automated CI/CD pipeline using AWS Lambda functions, AWS CodePipeline, and AWS SDK for Python (Boto3). The solution is designed to showcase how to build, test, deploy, and update AWS Lambda functions using a CI/CD pipeline, making use of AWS services like Lambda, S3, DynamoDB, and API Gateway.
 
