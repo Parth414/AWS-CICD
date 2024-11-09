@@ -1,0 +1,11 @@
+version: 0.0
+os: linux
+files:
+  - source: "resize_lambda.zip"
+    destination: "/tmp/resize_lambda.zip"
+  - source: "metadata_lambda.zip"
+    destination: "/tmp/metadata_lambda.zip"
+hooks:
+  AfterInstall:
+    - location: scripts/deploy_lambda.sh
+      timeout: 300

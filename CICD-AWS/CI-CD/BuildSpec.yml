@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing dependencies...
+      - pip install -r lambda_functions/resize_lambda/requirements.txt -t lambda_functions/resize_lambda/
+      - pip install -r lambda_functions/metadata_lambda/requirements.txt -t lambda_functions/metadata_lambda/
+  pre_build:
+    commands:
+      - echo Running tests...
+      - pytest lambda_functions/resize_lambda/test_resize_lambda.py
+      - pytest lambda_functions/metadata_lambda/test_metadata_lambda.py
+  build:
+    commands:
+      - echo Packaging Lambda functions...
+      - zip -r resize_lambda.zip lambda_functions/resize_lambda/*
+      - zip -r metadata_lambda.zip lambda_functions/metadata_lambda/*
+  post_build:
+    commands:
+      - echo Build completed successfully
+artifacts:
+  files:
+    - resize_lambda.zip
+    - metadata_lambda.zip
